@@ -70,13 +70,13 @@ jobs:
         with:
           projectBaseDir: client  #instead od working directory
           args: >
-            -Dsonar.projectKey=myorg_api
-            -Dsonar.projectName=myorg_api
+            -Dsonar.projectKey=myorg_client
+            -Dsonar.projectName=myorg_client
             -Dsonar.sources=.
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
         env:
-          SONAR_TOKEN: $ {{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: $ {{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           
   sonar-backend:
     runs-on: Agent-1
@@ -95,7 +95,7 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
         env:
-          SONAR_TOKEN: $ {{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: $ {{ secrets.SONAR_HOST_URL }}          
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}          
           
   
