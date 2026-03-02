@@ -41,7 +41,7 @@ jobs:
 
     - name: Gitleaks Scan
       run: |
-        gitleaks detect --sourcec ./client --exit-code 1
-        gitleaks detect --sourcec ./api --exit-code 1
+        gitleaks detect --source ./client --exit-code 1
+        gitleaks detect --source ./api --exit-code 1
      
     
