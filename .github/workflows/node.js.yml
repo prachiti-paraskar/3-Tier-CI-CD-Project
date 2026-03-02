@@ -48,18 +48,15 @@ jobs:
     runs-on: Agent-1
     needs: gitleaks-scan
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Run Trivy vulnerability scanner in fs mode
-      uses: aquasecurity/trivy-action@0.33.1
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        format: 'table'
-        ignore-unfixed: true
-        vuln-type: 'os,library'
-        severity: 'CRITICAL,HIGH'
+      - name: Run Trivy FS Scan
+        run: |
+          trivy fs \
+            --severity CRITICAL,HIGH \
+            --ignore-unfixed \
+            .
         
   docker:
      runs-on: Agent-1
