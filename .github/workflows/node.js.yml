@@ -45,4 +45,3 @@ jobs:
         gitleaks detect --source ./client --exit-code 1
         gitleaks detect --source ./api --exit-code 1
      
-    
