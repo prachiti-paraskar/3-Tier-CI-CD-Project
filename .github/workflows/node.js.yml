@@ -78,14 +78,14 @@ jobs:
           SONAR_TOKEN: $ {{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: $ {{ secrets.SONAR_HOST_URL }}
           
-    sonar-BACKend:
+    sonar-backend:
     runs-on: Agent-1
     needs: sonar-frontend
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Sonarqube Scan (client)
+      - name: Sonarqube Scan (api)
         uses: sonarsource/sonarqube-scan-action@master
         with:
           projectBaseDir: api  #instead od working directory
