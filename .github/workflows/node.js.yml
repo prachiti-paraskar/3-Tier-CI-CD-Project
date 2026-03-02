@@ -58,11 +58,44 @@ jobs:
             --ignore-unfixed \
             .
         
-  docker:
-     runs-on: Agent-1
-     needs: gitleaks-scan
-     steps:
-     - name: Test Docker 
-       run: |
-         docker --version
-         docker ps
+  sonar-frontend:
+    runs-on: Agent-1
+    needs: trivy_fs_scan
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sonarqube Scan (client)
+        uses: sonarsource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: client  #instead od working directory
+          args: >
+            -Dsonar.projectKey=myorg_api
+            -Dsonar.projectName=myorg_api
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
+        env:
+          SONAR_TOKEN: $ {{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: $ {{ secrets.SONAR_HOST_URL }}
+          
+    sonar-BACKend:
+    runs-on: Agent-1
+    needs: sonar-frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sonarqube Scan (client)
+        uses: sonarsource/sonarqube-scan-action@master
+        with:
+          projectBaseDir: api  #instead od working directory
+          args: >
+            -Dsonar.projectKey=myorg_api
+            -Dsonar.projectName=myorg_api
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
+        env:
+          SONAR_TOKEN: $ {{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: $ {{ secrets.SONAR_HOST_URL }}          
+          
+  
