@@ -78,7 +78,7 @@ jobs:
           SONAR_TOKEN: $ {{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: $ {{ secrets.SONAR_HOST_URL }}
           
-    sonar-backend:
+  sonar-backend:
     runs-on: Agent-1
     needs: sonar-frontend
     steps:
