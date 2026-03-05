@@ -153,6 +153,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Install Trivy
+        uses: aquasecurity/setup-trivy@v0.2.1
+        with:
+          version: latest
+
       - name: Run Trivy image scan for backend
         uses: aquasecurity/trivy-action@0.28.0
         with:
